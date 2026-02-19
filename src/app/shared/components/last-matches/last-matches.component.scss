@@ -1,25 +1,5 @@
 @use '../../../../styles/variables' as *;
 
-.section__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $space-md;
-}
-
-.section__title {
-  @include section-title;
-}
-
-.section__link {
-  color: $color-accent-vivid;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.15s;
-  &:hover { color: $color-accent; }
-}
-
 .match-list {
   @include card;
   overflow: hidden;
@@ -97,21 +77,3 @@
   }
 }
 
-.loading {
-  padding: $space-xl;
-  color: $color-text-muted;
-  text-align: center;
-}
-
-.error {
-  padding: $space-md 0;
-  color: $color-loss;
-  font-size: 0.88rem;
-}
-
-.empty-state {
-  padding: $space-xl;
-  text-align: center;
-  color: $color-text-muted;
-  font-size: 0.9rem;
-}

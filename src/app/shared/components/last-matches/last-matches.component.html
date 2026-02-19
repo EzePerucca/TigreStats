@@ -5,11 +5,11 @@
   </div>
   <div class="match-list">
     <ng-container *ngIf="loading; else loaded">
-      <div class="loading">Cargando estadísticas...</div>
+      <div class="ui-state ui-state--loading">Cargando estadísticas...</div>
     </ng-container>
     <ng-template #loaded>
       <ng-container *ngIf="error; else matchesList">
-        <div class="error">⚠️ {{ error }}</div>
+        <div class="ui-state ui-state--error">⚠️ {{ error }}</div>
       </ng-container>
       <ng-template #matchesList>
         <ng-container *ngIf="matches?.length; else empty">
@@ -35,7 +35,7 @@
           </div>
         </ng-container>
         <ng-template #empty>
-          <p class="empty-state">No hay partidos registrados para esta temporada.</p>
+          <p class="ui-state ui-state--empty">No hay partidos registrados para esta temporada.</p>
         </ng-template>
       </ng-template>
     </ng-template>

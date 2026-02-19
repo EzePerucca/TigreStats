@@ -1,0 +1,62 @@
+<section class="section standings">
+  <div class="section__header">
+    <h2 class="section__title">Posiciones</h2>
+    @if (hasMoreRows()) {
+      <button class="section__link standings__toggle" type="button" (click)="toggleRows()">
+        {{ showFull() ? 'Reducida' : 'Completa' }} →
+      </button>
+    }
+  </div>
+
+  <div class="standings__card" [attr.aria-label]="leagueName()">
+    @if (loading()) {
+      <div class="ui-state ui-state--loading ui-state--card">Cargando posiciones...</div>
+    } @else if (error()) {
+      <div class="ui-state ui-state--error ui-state--card">⚠️ {{ error() }}</div>
+    } @else if (!groups().length) {
+      <p class="ui-state ui-state--empty ui-state--card">No hay posiciones disponibles para esta temporada.</p>
+    } @else {
+      @for (group of groups(); track group.key) {
+        @if (group.name) {
+          <p class="standings__group-name">{{ group.name }}</p>
+        }
+
+        <div class="standings__table-wrap">
+          <table class="standings__table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>EQUIPO</th>
+                <th>PJ</th>
+                <th>GD</th>
+                <th>GF</th>
+                <th>PTS</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of getVisibleRows(group.rows); track trackByTeamApiId($index, row)) {
+                <tr class="standings__row" [class.standings__row--tigre]="isTigre(row.teamName)">
+                  <td class="standings__rank">{{ row.rank }}</td>
+                  <td class="standings__team">
+                    @if (row.teamLogo) {
+                      <img
+                        class="standings__logo"
+                        [src]="row.teamLogo"
+                        [alt]="'Escudo de ' + row.teamName"
+                      >
+                    }
+                    <span>{{ row.teamName }}</span>
+                  </td>
+                  <td>{{ row.played }}</td>
+                  <td>{{ formatGoalsDiff(row.goalsDiff) }}</td>
+                  <td>{{ row.goalsFor }}</td>
+                  <td class="standings__points">{{ row.points }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+  </div>
+</section>

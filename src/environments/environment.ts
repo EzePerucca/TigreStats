@@ -13,4 +13,5 @@ export const environment = {
     leagueId: 128,    // Liga Profesional Argentina
     season:   2024
   }
+  // {"module": "all", "season": "2024"}
 };

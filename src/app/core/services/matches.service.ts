@@ -2,6 +2,7 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { SupabaseService } from './supabase.service';
 import { Match } from '../models/models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class MatchesService {
@@ -12,7 +13,7 @@ export class MatchesService {
   private _matches  = signal<Match[]>([]);
   private _loading  = signal(false);
   private _error    = signal<string | null>(null);
-  private _season   = signal('2024');
+  private _season   = signal(environment.tigre.season);
 
   readonly loading  = this._loading.asReadonly();
   readonly error    = this._error.asReadonly();
@@ -30,7 +31,8 @@ export class MatchesService {
 
   readonly nextMatch = computed(() =>
     [...this._matches()]
-      .filter(m => m.status === 'NS' && new Date(m.date) > new Date())
+      .filter(m => new Date(m.date) > new Date())
+      // .filter(m => m.status === 'NS' && new Date(m.date) > new Date())
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] ?? null
   );
 
@@ -83,7 +85,7 @@ export class MatchesService {
     this._loading.set(false);
   }
 
-  setSeason(season: string): void {
+  setSeason(season: number): void {
     this._season.set(season);
     this.loadMatches(season);
   }
