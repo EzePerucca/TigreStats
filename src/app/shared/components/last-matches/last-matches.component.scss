@@ -1,0 +1,117 @@
+@use '../../../../styles/variables' as *;
+
+.section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-md;
+}
+
+.section__title {
+  @include section-title;
+}
+
+.section__link {
+  color: $color-accent-vivid;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.15s;
+  &:hover { color: $color-accent; }
+}
+
+.match-list {
+  @include card;
+  overflow: hidden;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 48px;
+  align-items: center;
+  padding: $space-md $space-lg;
+  border-bottom: 1px solid $color-border;
+  gap: $space-md;
+  transition: background 0.15s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: rgba(255,255,255,0.02); }
+
+  &__date {
+    font-size: 0.78rem;
+    color: $color-text-muted;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__round {
+    font-size: 0.68rem;
+    color: rgba($color-text-muted, 0.6);
+  }
+
+  &__teams {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: $space-md;
+  }
+
+  &__team {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: $color-text-muted;
+    &--tigre { color: $color-text; font-weight: 600; }
+    &:first-child { text-align: right; }
+    &:last-child  { text-align: left;  }
+  }
+
+  &__score {
+    font-family: $font-display;
+    font-size: 1.3rem;
+    letter-spacing: 0.06em;
+    color: $color-text;
+    white-space: nowrap;
+    text-align: center;
+  }
+}
+
+.result-badge {
+  min-width: 2.2em;
+  text-align: center;
+  border-radius: $radius-sm;
+  font-weight: bold;
+  margin-left: $space-lg;
+  padding: 0.2em 0.5em;
+  &.result--win {
+    background: rgba($color-win, 0.12);
+    color: $color-win;
+  }
+  &.result--draw {
+    background: rgba($color-draw, 0.12);
+    color: $color-draw;
+  }
+  &.result--loss {
+    background: rgba($color-loss, 0.12);
+    color: $color-loss;
+  }
+}
+
+.loading {
+  padding: $space-xl;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.error {
+  padding: $space-md 0;
+  color: $color-loss;
+  font-size: 0.88rem;
+}
+
+.empty-state {
+  padding: $space-xl;
+  text-align: center;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+}

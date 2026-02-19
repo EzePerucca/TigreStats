@@ -5,11 +5,12 @@ import { MatchesService } from '../../core/services/matches.service';
 import { NextMatchCardComponent } from '../../shared/components/next-match-card/next-match-card.component';
 import { KpiCards } from '../../shared/components/kpi-cards/kpi-cards';
 import { RecentFormComponent } from '../../shared/components/recent-form/recent-form.component';
+import { LastMatchesComponent } from '../../shared/components/last-matches/last-matches.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterLink, NextMatchCardComponent, KpiCards, RecentFormComponent],
+  imports: [CommonModule, RouterLink, NextMatchCardComponent, KpiCards, RecentFormComponent, LastMatchesComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

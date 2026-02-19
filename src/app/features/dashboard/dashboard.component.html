@@ -34,38 +34,13 @@
         <app-kpi-cards [stats]="stats()"></app-kpi-cards>
 
         <!-- ÚLTIMOS RESULTADOS -->
-        <section class="section">
-          <div class="section__header">
-            <h2 class="section__title">Últimos Resultados</h2>
-            <a routerLink="/partidos" class="section__link">Ver todos →</a>
-          </div>
-          <div class="match-list">
-            @for (match of matches(); track match.id) {
-              <div class="match-row">
-                <div class="match-row__date">
-                  {{ match.date | date: 'dd MMM' : '' : 'es' }}
-                  <span class="match-row__round">{{ match.round }}</span>
-                </div>
-                <div class="match-row__teams">
-                  <span class="match-row__team" [class.match-row__team--tigre]="match.homeTeam === 'Tigre'">
-                    {{ match.homeTeam }}
-                  </span>
-                  <div class="match-row__score">
-                    {{ match.homeScore }} – {{ match.awayScore }}
-                  </div>
-                  <span class="match-row__team" [class.match-row__team--tigre]="match.awayTeam === 'Tigre'">
-                    {{ match.awayTeam }}
-                  </span>
-                </div>
-                <div class="result-badge" [class]="getResultClass(match.result ?? '')">
-                  {{ getResultLabel(match.result ?? '') }}
-                </div>
-              </div>
-            } @empty {
-              <p class="empty-state">No hay partidos registrados para esta temporada.</p>
-            }
-          </div>
-        </section>
+        <app-last-matches
+          [matches]="matches()"
+          [loading]="loading()"
+          [error]="error()"
+          [getResultLabel]="getResultLabel"
+          [getResultClass]="getResultClass"
+        ></app-last-matches>
       </div>
 
       <!-- SECONDARY SECTION (RIGHT) -->
