@@ -1,0 +1,16 @@
+@use 'variables' as *;
+
+.result-badge {
+  width: 28px; height: 28px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin: 0 auto;
+}
+
+.result--win  { background: rgba(74, 222, 128, 0.12); color: $color-win;  }
+.result--draw { background: rgba(251, 215, 36, 0.12);  color: $color-draw; }
+.result--loss { background: rgba(248, 113, 113, 0.12); color: $color-loss; }

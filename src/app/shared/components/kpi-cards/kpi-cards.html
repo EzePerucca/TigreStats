@@ -1,0 +1,20 @@
+<div class="kpi-grid">
+	<div class="kpi-card">
+		<span class="kpi-card__label">Partidos Jugados</span>
+		<span class="kpi-card__value">{{ stats.played }}</span>
+		<span class="kpi-card__sub">{{ stats.won }}G · {{ stats.drawn }}E · {{ stats.lost }}P</span>
+	</div>
+	<div class="kpi-card">
+		<span class="kpi-card__label">Puntos</span>
+		<span class="kpi-card__value">{{ stats.points }}</span>
+		<span class="kpi-card__sub">{{ stats.pointsAverage }} por partido</span>
+	</div>
+	<div class="kpi-card">
+		<span class="kpi-card__label">Goles a favor</span>
+		<span class="kpi-card__value">{{ stats.goalsFor }}</span>
+	</div>
+	<div class="kpi-card">
+		<span class="kpi-card__label">Goles en contra</span>
+		<span class="kpi-card__value">{{ stats.goalsAgainst }}</span>
+	</div>
+</div>

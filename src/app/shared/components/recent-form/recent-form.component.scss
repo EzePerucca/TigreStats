@@ -1,0 +1,28 @@
+@use '../../../../styles/variables' as *;
+
+.form-strip {
+    @include card;
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+	margin-bottom: $space-xl;
+
+    &:hover {
+        background: lighten($color-surface, 4%);
+
+        &::before {
+            background: $color-accent;
+        }
+    }
+}
+
+.form-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}

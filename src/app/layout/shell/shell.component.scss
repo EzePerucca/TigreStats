@@ -1,0 +1,14 @@
+// shell.component.scss
+@use '../../../styles/variables' as *;
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background: $color-primary;
+}
+
+.shell__main {
+  flex: 1;
+  min-width: 0;       // evita overflow en flex
+  overflow-y: auto;
+}

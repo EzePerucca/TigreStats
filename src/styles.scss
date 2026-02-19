@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+@use 'styles/variables' as *;
+@use 'styles/utilities' as *;
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// ── Reset ─────────────────────────────────────────────────────────────────────
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-body;
+  background: $color-primary;
+  color: $color-text;
+  min-height: 100vh;
+  line-height: 1.5;
+  margin: 0;
+}
+
+// ── Tipografía ────────────────────────────────────────────────────────────────
+h1, h2, h3, h4 {
+  font-family: $font-display;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+
+a { color: inherit; }
+
+button {
+  font-family: $font-body;
+  cursor: pointer;
+}
+
+// ── Scrollbar global ─────────────────────────────────────────────────────────
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  &:hover { background: rgba(255,255,255,0.2); }
+}
+
+.section {
+  margin-bottom: $space-xl;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $space-md;
+  }
+
+  &__title { @include section-title; }
+
+  &__link {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+    text-decoration: none;
+    border: 1px solid $color-border;
+    padding: 4px 12px;
+    border-radius: $radius-sm;
+    transition: all 0.15s;
+
+    &:hover { color: $color-text; border-color: rgba(255,255,255,0.2); }
+  }
+}

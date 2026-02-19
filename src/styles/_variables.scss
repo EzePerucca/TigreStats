@@ -1,0 +1,82 @@
+// styles/_variables.scss — Diseño TigreStats
+
+// ── Colores ──────────────────────────────────────────────────────────────────
+$color-primary:      #0A1628;     // Azul oscuro (fondo principal)
+$color-surface:      #122040;     // Azul medio (cards, sidebar)
+$color-accent:       #C8102E;     // Rojo Tigre
+$color-accent-vivid: #E8192E;     // Rojo más brillante (hover, énfasis)
+$color-gold:         #F0B429;     // Dorado (líder, destacados)
+
+$color-text:         #F8FAFC;     // Blanco principal
+$color-text-muted:   #8A9BB0;     // Gris para labels y fechas
+$color-border:       rgba(255,255,255,0.07);
+
+// ── Resultado ────────────────────────────────────────────────────────────────
+$color-win:   #4ADE80;
+$color-draw:  #FBD724;
+$color-loss:  #F87171;
+
+// ── Tipografía ───────────────────────────────────────────────────────────────
+// Agregar en index.html:
+// <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+$font-display: 'Bebas Neue', sans-serif;
+$font-body:    'DM Sans', sans-serif;
+
+// ── Espaciado ────────────────────────────────────────────────────────────────
+$space-xs:  0.25rem;   // 4px
+$space-sm:  0.5rem;    // 8px
+$space-md:  1rem;      // 16px
+$space-lg:  1.5rem;    // 24px
+$space-xl:  2.5rem;    // 40px
+
+// ── Bordes y sombras ─────────────────────────────────────────────────────────
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+$shadow-accent: 0 0 16px rgba(200,16,46,0.4);
+
+// ── Breakpoints ──────────────────────────────────────────────────────────────
+$bp-sm:  576px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
+
+// ── Mixins ───────────────────────────────────────────────────────────────────
+@mixin card {
+  background: $color-surface;
+  border-radius: $radius-md;
+  border: 1px solid $color-border;
+}
+
+@mixin section-title {
+  font-family: $font-display;
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  color: $color-text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 1.1rem;
+    background: $color-accent;
+    border-radius: 2px;
+  }
+}
+
+@mixin result-badge($bg, $color) {
+  background: rgba($bg, 0.15);
+  color: $color;
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-sm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}

@@ -1,0 +1,86 @@
+<!-- dashboard.component.html -->
+<div class="dashboard">
+  <!-- HERO HEADER -->
+  <div class="dashboard__hero">
+    <div class="dashboard__hero-content">
+      <div class="dashboard__badge">
+        <span class="dashboard__badge-dot"></span>
+        Temporada en curso · Liga Profesional 2025
+      </div>
+      <h1 class="dashboard__hero-title">
+        ESTADÍSTICAS<br>
+        <span>CLUB ATLÉTICO<br>TIGRE</span>
+      </h1>
+      <p class="dashboard__hero-sub">
+        Datos históricos, estadísticas de jugadores, resultados y posiciones del Matador de Victoria.
+      </p>
+    </div>
+  </div>
+
+  <!-- LOADING STATE -->
+  @if (loading()) {
+    <div class="loading">Cargando estadísticas...</div>
+  }
+
+  @if (error()) {
+    <div class="error">⚠️ {{ error() }}</div>
+  }
+
+  @if (!loading()) {
+    <div class="dashboard__split">
+      <!-- MAIN SECTION (LEFT) -->
+      <div class="dashboard__main">
+        <!-- KPI CARDS -->
+        <app-kpi-cards [stats]="stats()"></app-kpi-cards>
+
+        <!-- ÚLTIMOS RESULTADOS -->
+        <section class="section">
+          <div class="section__header">
+            <h2 class="section__title">Últimos Resultados</h2>
+            <a routerLink="/partidos" class="section__link">Ver todos →</a>
+          </div>
+          <div class="match-list">
+            @for (match of matches(); track match.id) {
+              <div class="match-row">
+                <div class="match-row__date">
+                  {{ match.date | date: 'dd MMM' : '' : 'es' }}
+                  <span class="match-row__round">{{ match.round }}</span>
+                </div>
+                <div class="match-row__teams">
+                  <span class="match-row__team" [class.match-row__team--tigre]="match.homeTeam === 'Tigre'">
+                    {{ match.homeTeam }}
+                  </span>
+                  <div class="match-row__score">
+                    {{ match.homeScore }} – {{ match.awayScore }}
+                  </div>
+                  <span class="match-row__team" [class.match-row__team--tigre]="match.awayTeam === 'Tigre'">
+                    {{ match.awayTeam }}
+                  </span>
+                </div>
+                <div class="result-badge" [class]="getResultClass(match.result ?? '')">
+                  {{ getResultLabel(match.result ?? '') }}
+                </div>
+              </div>
+            } @empty {
+              <p class="empty-state">No hay partidos registrados para esta temporada.</p>
+            }
+          </div>
+        </section>
+      </div>
+
+      <!-- SECONDARY SECTION (RIGHT) -->
+      <div class="dashboard__side">
+        @if (nextMatch()) {
+          <app-next-match-card [match]="nextMatch()!" />
+        }
+
+        <app-recent-form
+          [recentForm]="recentForm()"
+          [getResultLabel]="getResultLabel"
+          [getResultClass]="getResultClass"
+        ></app-recent-form>
+        <!-- Aquí puedes agregar más componentes secundarios en el futuro -->
+      </div>
+    </div>
+  }
+</div>

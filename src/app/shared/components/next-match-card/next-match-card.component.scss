@@ -1,0 +1,126 @@
+// next-match-card.component.scss
+@use '../../../../styles/variables' as *;
+
+.next-match {
+  @include card;
+  position: relative;
+  border: 1px solid rgba($color-accent, 0.2);
+  padding: $space-lg;
+  overflow: hidden;
+}
+
+.next-match__glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba($color-accent, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.next-match__label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-accent-vivid;
+  margin-bottom: $space-lg;
+}
+
+.next-match__label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-accent-vivid;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.next-match__body {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+}
+
+.next-match__team {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &--home {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  &--away {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+.next-match__team-name {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  color: $color-text;
+  line-height: 1;
+}
+
+.next-match__team-condition {
+  font-size: 0.7rem;
+  color: $color-text-muted;
+  letter-spacing: 0.06em;
+}
+
+.next-match__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.next-match__vs {
+  font-family: $font-display;
+  font-size: 1.8rem;
+  color: rgba($color-text, 0.15);
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+
+.next-match__date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $color-text-muted;
+  white-space: nowrap;
+  background: rgba(255,255,255,0.05);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.next-match__footer {
+  display: flex;
+  gap: $space-lg;
+  border-top: 1px solid $color-border;
+  padding-top: $space-md;
+  flex-wrap: wrap;
+}
+
+.next-match__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: $color-text-muted;
+
+  svg { flex-shrink: 0; opacity: 0.6; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}

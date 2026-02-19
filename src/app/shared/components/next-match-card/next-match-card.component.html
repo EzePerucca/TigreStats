@@ -1,0 +1,52 @@
+<!-- next-match-card.component.html -->
+<div class="next-match">
+  <div class="next-match__glow"></div>
+
+  <div class="next-match__label">
+    <span class="next-match__label-dot"></span>
+    Próximo Partido
+  </div>
+
+  <div class="next-match__body">
+    <div class="next-match__team next-match__team--home">
+      <span class="next-match__team-name">{{ match().homeTeam }}</span>
+      <span class="next-match__team-condition">Local</span>
+    </div>
+
+    <div class="next-match__center">
+      <span class="next-match__vs">VS</span>
+      <span class="next-match__date">
+        {{ match().date | date: 'dd MMM · HH:mm' : '' : 'es' }}hs
+      </span>
+    </div>
+
+    <div class="next-match__team next-match__team--away">
+      <span class="next-match__team-name">{{ match().awayTeam }}</span>
+      <span class="next-match__team-condition">Visitante</span>
+    </div>
+  </div>
+
+  <div class="next-match__footer">
+    <span class="next-match__meta">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      {{ match().round }}
+    </span>
+    <span class="next-match__meta">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+      </svg>
+      {{ match().venue ?? 'Estadio a confirmar' }}
+    </span>
+    <span class="next-match__meta">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="11"/>
+        <path d="M7 4H4a1 1 0 0 0-1 1v3a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V5a1 1 0 0 0-1-1h-3"/>
+        <rect x="7" y="2" width="10" height="9" rx="1"/>
+      </svg>
+      {{ match().tournament }}
+    </span>
+  </div>
+</div>
