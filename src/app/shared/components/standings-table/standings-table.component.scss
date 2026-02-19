@@ -1,0 +1,120 @@
+@use '../../../../styles/variables' as *;
+
+.standings__card {
+    @include card;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba($color-surface, 0.98) 0%, rgba(#0f1e3b, 0.98) 100%);
+}
+
+.standings__toggle {
+    background: transparent;
+}
+
+.standings__group-name {
+    color: $color-text-muted;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: $space-sm $space-md 0;
+}
+
+.standings__table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.standings__table {
+    width: 100%;
+    border-collapse: collapse;
+    //   min-width: 560px;
+
+    th,
+    td {
+        padding: 12px 10px;
+        border-bottom: 1px solid $color-border;
+        font-size: 0.9rem;
+    }
+
+    th {
+        color: rgba($color-text-muted, 0.9);
+        font-size: 0.72rem;
+        letter-spacing: 0.09em;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: right;
+
+        &:nth-child(2) {
+            text-align: left;
+        }
+    }
+
+    td {
+        color: rgba($color-text, 0.78);
+        text-align: right;
+
+        &:nth-child(2) {
+            text-align: left;
+        }
+    }
+}
+
+.standings__row {
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    &:last-child td {
+        border-bottom: none;
+    }
+}
+
+.standings__rank {
+    width: 40px;
+    color: $color-text-muted;
+}
+
+.standings__team {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $color-text;
+    font-weight: 600;
+    // white-space: nowrap;
+}
+
+.standings__logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.standings__points {
+    color: $color-text;
+    font-weight: 700;
+}
+
+.standings__row--tigre {
+    background: rgba($color-accent, 0.12);
+
+    .standings__rank {
+        color: $color-accent-vivid;
+        border-left: 3px solid $color-accent-vivid;
+        padding-left: 7px;
+    }
+
+    .standings__team {
+        color: $color-text;
+    }
+
+    .standings__points {
+        color: $color-accent-vivid;
+    }
+}
+
+@media (max-width: $bp-md) {
+    .standings__table {
+        min-width: 520px;
+    }
+}

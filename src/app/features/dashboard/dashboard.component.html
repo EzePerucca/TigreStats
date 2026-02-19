@@ -19,11 +19,11 @@
 
   <!-- LOADING STATE -->
   @if (loading()) {
-    <div class="loading">Cargando estadísticas...</div>
+    <div class="ui-state ui-state--loading">Cargando estadísticas...</div>
   }
 
   @if (error()) {
-    <div class="error">⚠️ {{ error() }}</div>
+    <div class="ui-state ui-state--error">⚠️ {{ error() }}</div>
   }
 
   @if (!loading()) {
@@ -55,7 +55,9 @@
           [getResultClass]="getResultClass"
         ></app-recent-form>
         <!-- Aquí puedes agregar más componentes secundarios en el futuro -->
+        <app-standings-table></app-standings-table>
       </div>
     </div>
+
   }
 </div>

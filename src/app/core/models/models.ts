@@ -100,3 +100,46 @@ export interface Transfer {
   isFree?: boolean;
   notes?: string;
 }
+
+// ─── standing.model.ts ────────────────────────────────────────────────────────
+export interface Standing {
+  id:              number;
+  tournamentApiId: number;
+  tournamentName:  string;
+  season:          string;
+  groupName:       string | null;
+
+  teamApiId: number;
+  teamName:  string;
+  teamLogo:  string | null;
+
+  rank:        number;
+  points:      number;
+  form:        string | null;  // 'WWDLW'
+  status:      string | null;  // 'up' | 'down' | 'same'
+  description: string | null;  // 'Promotion' | 'Relegation' | null
+
+  played:       number;
+  won:          number;
+  drawn:        number;
+  lost:         number;
+  goalsFor:     number;
+  goalsAgainst: number;
+  goalsDiff:    number;
+
+  homePlayed:       number;
+  homeWon:          number;
+  homeDrawn:        number;
+  homeLost:         number;
+  homeGoalsFor:     number;
+  homeGoalsAgainst: number;
+
+  awayPlayed:       number;
+  awayWon:          number;
+  awayDrawn:        number;
+  awayLost:         number;
+  awayGoalsFor:     number;
+  awayGoalsAgainst: number;
+
+  updatedAt: string;
+}
