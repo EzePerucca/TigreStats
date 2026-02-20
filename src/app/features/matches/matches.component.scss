@@ -1,0 +1,224 @@
+@use '../../../styles/variables' as *;
+
+.matches {
+  padding: $space-xl $space-xl 0 $space-xl;
+}
+
+.matches__hero {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  margin-bottom: $space-xl;
+}
+
+.matches__title-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $color-accent;
+}
+
+.matches__title {
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  letter-spacing: 0.03em;
+  color: $color-text;
+}
+
+.matches__subtitle {
+  color: $color-text-muted;
+  font-size: 0.95rem;
+  max-width: 700px;
+}
+
+.matches-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 1px solid $color-border;
+  margin-bottom: $space-xl;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.matches-kpi-card {
+  @include card;
+  border: 0;
+  border-radius: 0;
+  padding: $space-lg;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($color-accent-vivid, 0.8);
+    outline-offset: -2px;
+  }
+
+  &--active {
+    box-shadow: inset 0 0 0 2px rgba($color-text-muted, 0.28);
+    transform: translateY(-1px);
+  }
+
+  &__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+  }
+
+  &__value {
+    font-family: $font-display;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: $color-text;
+  }
+
+  &__sub {
+    font-size: 0.8rem;
+    color: $color-text-muted;
+  }
+
+  &--win {
+    background: rgba(lighten($color-win, 10%), 0.16);
+
+    .matches-kpi-card__label,
+    .matches-kpi-card__sub {
+      color: lighten($color-win, 20%);
+    }
+
+    .matches-kpi-card__value {
+      color: $color-win
+    }
+  }
+
+  &--draw {
+    background: rgba(lighten($color-draw, 10%), 0.16);
+
+    .matches-kpi-card__label,
+    .matches-kpi-card__sub {
+      color: lighten($color-draw, 20%);
+    }
+
+    .matches-kpi-card__value {
+      color: $color-draw
+    }
+  }
+
+  &--loss {
+    background: rgba(lighten($color-loss, 10%), 0.16);
+
+    .matches-kpi-card__label,
+    .matches-kpi-card__sub {
+      color: lighten($color-loss, 20%);
+    }
+
+    .matches-kpi-card__value {
+      color: $color-loss
+    }
+  }
+}
+
+.matches-history__card {
+  @include card;
+  overflow: hidden;
+}
+
+.matches-history__table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.matches-history__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 840px;
+
+  th,
+  td {
+    padding: 12px 10px;
+    font-size: 0.88rem;
+    color: rgba($color-text, 0.82);
+    text-align: left;
+  }
+
+  th {
+    color: rgba($color-text-muted, 0.9);
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  tbody tr {
+    transition: background 0.15s ease;
+    border-bottom: 1px solid $color-border;
+
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+.matches-history__fixture {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.matches-history__team--tigre {
+  color: $color-text;
+  font-weight: 600;
+}
+
+.matches-history__score {
+  font-family: $font-display;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: $color-text;
+}
+
+.result-badge {
+  min-width: 2.2em;
+  text-align: center;
+  border-radius: $radius-sm;
+  font-weight: bold;
+  padding: 0.2em 0.5em;
+  display: inline-flex;
+  justify-content: center;
+
+  &.result--win {
+    background: rgba($color-win, 0.12);
+    color: $color-win;
+  }
+
+  &.result--draw {
+    background: rgba($color-draw, 0.12);
+    color: $color-draw;
+  }
+
+  &.result--loss {
+    background: rgba($color-loss, 0.12);
+    color: $color-loss;
+  }
+}

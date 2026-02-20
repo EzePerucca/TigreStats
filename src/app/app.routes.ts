@@ -18,12 +18,12 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
         title: 'Dashboard — TigreStats'
       },
-      // {
-      //   path: 'partidos',
-      //   loadComponent: () =>
-      //     import('./features/matches/matches.component').then(m => m.MatchesComponent),
-      //   title: 'Partidos — TigreStats'
-      // },
+      {
+        path: 'matches',
+        loadComponent: () =>
+          import('./features/matches/matches.component').then(m => m.MatchesComponent),
+        title: 'Partidos — TigreStats'
+      },
       // {
       //   path: 'plantel',
       //   loadComponent: () =>

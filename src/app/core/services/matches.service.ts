@@ -105,7 +105,7 @@ export class MatchesService {
       id:         String(row.id),
       apiId:      row.api_id,
       date:       row.date,
-      tournament: row.tournament,
+      tournament: row.tournament_name,
       round:      row.round,
       homeTeam:   row.home_team,
       awayTeam:   row.away_team,

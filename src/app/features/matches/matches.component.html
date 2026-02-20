@@ -1,0 +1,138 @@
+<div class="matches">
+  <header class="matches__hero">
+    <div class="matches__title-wrapper" aria-hidden="true">
+        <svg width="35" height="55" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 2v6h6" />
+            <path d="M3.05 13a9 9 0 1 0 2.13-5.65L3 8" />
+            <path d="M12 7v5l3 3" />
+        </svg>
+        <h1 class="matches__title">Historial De Partidos</h1>
+    </div>
+    <p class="matches__subtitle">
+      Resumen general de rendimiento y detalle completo de todos los encuentros registrados.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <div class="ui-state ui-state--loading">Cargando partidos...</div>
+  }
+
+  @if (error()) {
+    <div class="ui-state ui-state--error">⚠️ {{ error() }}</div>
+  }
+
+  @if (!loading() && !error()) {
+    <section class="section">
+      <!-- <div class="section__header">
+        <h2 class="section__title">Indicadores Clave</h2>
+      </div> -->
+
+      <div class="matches-kpi-grid">
+        <article
+          class="matches-kpi-card"
+          [class.matches-kpi-card--active]="selectedKpiFilter() === 'played'"
+          (click)="setKpiFilter('played')"
+          (keydown.enter)="setKpiFilter('played')"
+          (keydown.space)="setKpiFilter('played')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="matches-kpi-card__label">Total Jugados</span>
+          <span class="matches-kpi-card__value">{{ stats().played }}</span>
+          <!-- <span class="matches-kpi-card__sub">100 %</span> -->
+        </article>
+
+        <article
+          class="matches-kpi-card matches-kpi-card--win"
+          [class.matches-kpi-card--active]="selectedKpiFilter() === 'won'"
+          (click)="setKpiFilter('won')"
+          (keydown.enter)="setKpiFilter('won')"
+          (keydown.space)="setKpiFilter('won')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="matches-kpi-card__label">Total Ganados</span>
+          <span class="matches-kpi-card__value">{{ stats().won }}</span>
+          <span class="matches-kpi-card__sub">{{ getPercentage(stats().won) }} %</span>
+        </article>
+
+        <article
+          class="matches-kpi-card matches-kpi-card--draw"
+          [class.matches-kpi-card--active]="selectedKpiFilter() === 'drawn'"
+          (click)="setKpiFilter('drawn')"
+          (keydown.enter)="setKpiFilter('drawn')"
+          (keydown.space)="setKpiFilter('drawn')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="matches-kpi-card__label">Total Empatados</span>
+          <span class="matches-kpi-card__value">{{ stats().drawn }}</span>
+          <span class="matches-kpi-card__sub">{{ getPercentage(stats().drawn) }} %</span>
+        </article>
+
+        <article
+          class="matches-kpi-card matches-kpi-card--loss"
+          [class.matches-kpi-card--active]="selectedKpiFilter() === 'lost'"
+          (click)="setKpiFilter('lost')"
+          (keydown.enter)="setKpiFilter('lost')"
+          (keydown.space)="setKpiFilter('lost')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="matches-kpi-card__label">Total Perdidos</span>
+          <span class="matches-kpi-card__value">{{ stats().lost }}</span>
+          <span class="matches-kpi-card__sub">{{ getPercentage(stats().lost) }} %</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section matches-history">
+      <div class="section__header">
+        <h2 class="section__title">Historial Completo</h2>
+      </div>
+
+      <div class="matches-history__card">
+        @if (filteredMatches().length) {
+          <div class="matches-history__table-wrap">
+            <table class="matches-history__table">
+              <thead>
+                <tr>
+                  <th>Resultado</th>
+                  <th>Partido</th>
+                  <th>Marcador</th>
+                  <th>Fecha</th>
+                  <th>Torneo</th>
+                  <th>Ronda</th>
+                  <th>Condición</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (match of filteredMatches(); track trackById($index, match)) {
+                  <tr>
+                    <td>
+                      <span class="result-badge" [class]="getResultClass(match.result)">
+                        {{ getResultLabel(match.result) }}
+                      </span>
+                    </td>
+                    <td class="matches-history__fixture">
+                      <span [class.matches-history__team--tigre]="match.homeTeam === 'Tigre'">{{ match.homeTeam }}</span>
+                      <span>vs</span>
+                      <span [class.matches-history__team--tigre]="match.awayTeam === 'Tigre'">{{ match.awayTeam }}</span>
+                    </td>
+                    <td class="matches-history__score">{{ getScore(match) }}</td>
+                    <td>{{ match.date | date: 'dd MMM yyyy' : '' : 'es' }}</td>
+                    <td>{{ match.tournament }}</td>
+                    <td>{{ match.round }}</td>
+                    <td>{{ isHome(match) ? 'Local' : 'Visitante' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <p class="ui-state ui-state--empty ui-state--card">No hay partidos para el filtro seleccionado.</p>
+        }
+      </div>
+    </section>
+  }
+</div>
