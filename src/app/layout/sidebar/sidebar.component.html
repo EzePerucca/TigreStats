@@ -2,7 +2,7 @@
 
   <!-- LOGO -->
   <div class="sidebar__logo">
-    <div class="sidebar__logo-badge">T</div>
+    <img class="sidebar__logo-img" src="assets/images/escudo_tigre_logo.svg" alt="Logo">
     @if (!isCollapsed()) {
       <span class="sidebar__logo-text">TIGRE<em>STATS</em></span>
     }
@@ -19,7 +19,7 @@
   <!-- NAV -->
   <nav class="sidebar__nav">
     @if (!isCollapsed()) {
-      <span class="sidebar__section-label">ESTADÍSTICAS</span>
+      <span class="sidebar__section-label">HISTORIAL</span>
     }
 
     @for (item of navItems; track item.route) {

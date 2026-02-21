@@ -56,25 +56,20 @@ $transition:              all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 1.5rem 1.25rem 1.25rem;
+  padding: 1.5rem 1rem 1.25rem;
   border-bottom: 1px solid $color-border;
   min-height: 68px;
   transition: $transition;
 }
 
-.sidebar__logo-badge {
-  width: 34px;
-  height: 34px;
-  background: $color-accent;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: $font-display;
-  font-size: 18px;
-  color: white;
-  box-shadow: 0 0 14px rgba($color-accent, 0.45);
+
+.sidebar__logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
   flex-shrink: 0;
+  border-radius: 8px;
+  margin-top: -5px; // para alinear ópticamente con el texto
 }
 
 .sidebar__logo-text {
