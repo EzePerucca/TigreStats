@@ -38,7 +38,7 @@ export interface Player {
   name: string;
   lastName: string;
   number?: number;
-  position: PlayerPosition;
+  position: PlayerPosition | null;
   nationality: string;
   birthDate?: string;
   photoUrl?: string;

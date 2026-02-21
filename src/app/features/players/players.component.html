@@ -1,0 +1,142 @@
+<div class="players">
+  <header class="players__hero">
+    <div class="players__title-wrapper" aria-hidden="true">
+      <svg width="35" height="55" viewBox="0 0 24 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+      <h1 class="players__title">Plantel</h1>
+    </div>
+    <p class="players__subtitle">
+      Vista general de jugadores activos con métricas individuales por temporada.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <div class="ui-state ui-state--loading">Cargando plantel...</div>
+  }
+
+  @if (error()) {
+    <div class="ui-state ui-state--error">⚠️ {{ error() }}</div>
+  }
+
+  @if (!loading() && !error()) {
+    <section class="section">
+      <div class="players-kpi-grid">
+        <article
+          class="players-kpi-card"
+          [class.players-kpi-card--active]="selectedFilter() === 'all'"
+          (click)="setFilter('all')"
+          (keydown.enter)="setFilter('all')"
+          (keydown.space)="setFilter('all')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="players-kpi-card__label">Total Activos</span>
+          <span class="players-kpi-card__value">{{ stats().total }}</span>
+        </article>
+
+        <article
+          class="players-kpi-card"
+          [class.players-kpi-card--active]="selectedFilter() === 'Portero'"
+          (click)="setFilter('Portero')"
+          (keydown.enter)="setFilter('Portero')"
+          (keydown.space)="setFilter('Portero')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="players-kpi-card__label">Porteros</span>
+          <span class="players-kpi-card__value">{{ stats().goalkeepers }}</span>
+        </article>
+
+        <article
+          class="players-kpi-card"
+          [class.players-kpi-card--active]="selectedFilter() === 'Defensor'"
+          (click)="setFilter('Defensor')"
+          (keydown.enter)="setFilter('Defensor')"
+          (keydown.space)="setFilter('Defensor')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="players-kpi-card__label">Defensores</span>
+          <span class="players-kpi-card__value">{{ stats().defenders }}</span>
+        </article>
+
+        <article
+          class="players-kpi-card"
+          [class.players-kpi-card--active]="selectedFilter() === 'Mediocampista'"
+          (click)="setFilter('Mediocampista')"
+          (keydown.enter)="setFilter('Mediocampista')"
+          (keydown.space)="setFilter('Mediocampista')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="players-kpi-card__label">Mediocampistas</span>
+          <span class="players-kpi-card__value">{{ stats().midfielders }}</span>
+        </article>
+
+        <article
+          class="players-kpi-card"
+          [class.players-kpi-card--active]="selectedFilter() === 'Delantero'"
+          (click)="setFilter('Delantero')"
+          (keydown.enter)="setFilter('Delantero')"
+          (keydown.space)="setFilter('Delantero')"
+          tabindex="0"
+          role="button"
+        >
+          <span class="players-kpi-card__label">Delanteros</span>
+          <span class="players-kpi-card__value">{{ stats().forwards }}</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section players-roster">
+      <div class="section__header">
+        <h2 class="section__title">Listado Completo</h2>
+      </div>
+
+      <div class="players-roster__card">
+        @if (filteredPlayers().length) {
+          <div class="players-roster__table-wrap">
+            <table class="players-roster__table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Jugador</th>
+                  <th>Posición</th>
+                  <th>Nacionalidad</th>
+                  <th>PJ</th>
+                  <th>G</th>
+                  <th>A</th>
+                  <th>TA</th>
+                  <th>TR</th>
+                  <th>Min</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (player of filteredPlayers(); track trackById($index, player)) {
+                  <tr>
+                    <td>{{ player.number ?? '-' }}</td>
+                    <td class="players-roster__name">{{ getFullName(player) }}</td>
+                    <td>{{ player.position ?? '-' }}</td>
+                    <td>{{ player.nationality }}</td>
+                    <td>{{ player.stats.matchesPlayed }}</td>
+                    <td>{{ player.stats.goals }}</td>
+                    <td>{{ player.stats.assists }}</td>
+                    <td>{{ player.stats.yellowCards }}</td>
+                    <td>{{ player.stats.redCards }}</td>
+                    <td>{{ player.stats.minutesPlayed ?? '-' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <p class="ui-state ui-state--empty ui-state--card">No hay jugadores para el filtro seleccionado.</p>
+        }
+      </div>
+    </section>
+  }
+</div>
