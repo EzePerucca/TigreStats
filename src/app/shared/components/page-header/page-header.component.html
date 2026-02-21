@@ -1,0 +1,22 @@
+<div class="page-header">
+
+  <div class="header-left">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      <span class="eyebrow-text">{{ eyebrow }}</span>
+    </div>
+    <h1 class="page-title">{{ title }}</h1>
+  </div>
+
+  <div class="header-right" *ngIf="actionLabel">
+    <button class="action-btn" (click)="onAction()">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path d="M2 4h12M4 8h8M6 12h4"/>
+      </svg>
+      {{ actionLabel }}
+    </button>
+  </div>
+
+</div>
+
+<div class="header-divider"></div>

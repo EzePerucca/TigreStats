@@ -25,7 +25,7 @@ export class SidebarComponent {
 
   readonly navItems: NavItem[] = [
     { label: 'Dashboard',      route: '/dashboard',      icon: 'grid'     },
-    { label: 'Partidos',       route: '/matches',        icon: 'calendar' },
+    { label: 'Historial Partidos',       route: '/matches',        icon: 'calendar' },
     { label: 'Plantel',        route: '/plantel',        icon: 'users'    },
     { label: 'Torneos',        route: '/torneos',        icon: 'trophy'   },
     { label: 'Transferencias', route: '/transferencias', icon: 'swap'     },

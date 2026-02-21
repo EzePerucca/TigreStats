@@ -1,5 +1,12 @@
 @use 'variables' as *;
 
+// ── Horizontal Divider ────────────────────────────────────────────
+.header-divider {
+  height: 1px;
+  background: $color-border;
+  margin-top: $space-lg;
+}
+
 .result-badge {
   width: 28px; height: 28px;
   border-radius: $radius-sm;

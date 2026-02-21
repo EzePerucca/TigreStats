@@ -1,138 +1,262 @@
 @use '../../../styles/variables' as *;
 
+
+:host {
+  display: block;
+}
+
 .matches {
   padding: $space-xl $space-xl 0 $space-xl;
 }
 
-.matches__hero {
-  display: flex;
-  flex-direction: column;
-  gap: $space-sm;
-  margin-bottom: $space-xl;
+.section {
+  margin-bottom: $space-lg;
+  margin-top: $space-lg;
 }
 
-.matches__title-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: $color-accent;
-}
-
-.matches__title {
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  letter-spacing: 0.03em;
-  color: $color-text;
-}
-
-.matches__subtitle {
-  color: $color-text-muted;
-  font-size: 0.95rem;
-  max-width: 700px;
-}
-
-.matches-kpi-grid {
+// Historial de partidos
+// ── Grid ───────────────────────────────────────────────
+.cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: $color-border;
-  border-radius: $radius-md;
-  overflow: hidden;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+// ── Base card ──────────────────────────────────────────
+.card {
+  background: $color-surface;
   border: 1px solid $color-border;
-  margin-bottom: $space-xl;
+  border-radius: 14px;
+  padding: 24px 22px 20px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: rise 0.5s ease forwards;
 
-  @media (max-width: $bp-md) {
-    grid-template-columns: repeat(2, 1fr);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
   }
+  &:hover::before { opacity: 1; }
 
-  @media (max-width: $bp-sm) {
-    grid-template-columns: 1fr;
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.08}s; }
   }
 }
 
-.matches-kpi-card {
-  @include card;
-  border: 0;
-  border-radius: 0;
-  padding: $space-lg;
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ── Card: Total ────────────────────────────────────────
+.card-total {
+  background: linear-gradient(135deg, #1a2030 0%, #161c26 100%);
+  border-color: rgba(232, 41, 58, 0.25);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  cursor: pointer;
-  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
 
-  &:hover {
-    filter: brightness(1.15);
+  &::before {
+    background: linear-gradient(135deg, rgba(232, 41, 58, 0.06) 0%, transparent 60%);
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba($color-accent-vivid, 0.8);
-    outline-offset: -2px;
+  .glow {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(232, 41, 58, 0.18) 0%, transparent 70%);
+    pointer-events: none;
   }
+
+  .card-number { font-size: 72px; margin-top: $space-md;}
+
+  .card-label {
+    font-size: 18px;
+    letter-spacing: 0.24em;
+    color: rgba($color-text, 0.95);
+    text-shadow: 0 4px 14px rgba(232, 41, 58, 0.35);
+    align-self: flex-start;
+  }
+
+  .dist-bar-container {
+    margin-top: auto;
+  }
+
+  .dist-legend {
+    margin-bottom: 0;
+  }
+}
+
+// ── Labels ─────────────────────────────────────────────
+.card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: 10px;
+}
+
+.card-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  color: $color-text;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+// ── Distribution bar ───────────────────────────────────
+.dist-bar {
+  display: flex;
+  height: 5px;
+  border-radius: 99px;
+  overflow: hidden;
+  gap: 2px;
+  margin-bottom: 12px;
+
+  span {
+    border-radius: 99px;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    &:nth-child(1) { animation-delay: 0.5s; }
+    &:nth-child(2) { animation-delay: 0.6s; }
+    &:nth-child(3) { animation-delay: 0.7s; }
+  }
+
+  .seg-g { background: $color-win; }
+  .seg-e { background: $color-draw; }
+  .seg-p { background: $color-loss; }
+}
+
+@keyframes grow {
+  to { transform: scaleX(1); }
+}
+
+.dist-legend {
+  display: flex;
+  gap: 14px;
+
+  span {
+    font-size: 11px;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    &.lg::before { background: $color-win; }
+    &.le::before { background: $color-draw; }
+    &.lp::before { background: $color-loss; }
+  }
+}
+
+// ── Result cards ───────────────────────────────────────
+.card-result {
+  transition: transform 0.2s, border-color 0.2s;
+  &:hover { transform: translateY(-3px); }
+}
+
+.card-won {
+  border-top: 3px solid $color-win;
+  &::before { background: linear-gradient(180deg, $color-win-dim 0%, transparent 50%); }
+  .card-number { color: $color-win; }
 
   &--active {
-    box-shadow: inset 0 0 0 2px rgba($color-text-muted, 0.28);
-    transform: translateY(-1px);
-  }
-
-  &__label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: $color-text-muted;
-  }
-
-  &__value {
-    font-family: $font-display;
-    font-size: 2.8rem;
-    line-height: 1;
-    color: $color-text;
-  }
-
-  &__sub {
-    font-size: 0.8rem;
-    color: $color-text-muted;
-  }
-
-  &--win {
-    background: rgba(lighten($color-win, 10%), 0.16);
-
-    .matches-kpi-card__label,
-    .matches-kpi-card__sub {
-      color: lighten($color-win, 20%);
-    }
-
-    .matches-kpi-card__value {
-      color: $color-win
-    }
-  }
-
-  &--draw {
-    background: rgba(lighten($color-draw, 10%), 0.16);
-
-    .matches-kpi-card__label,
-    .matches-kpi-card__sub {
-      color: lighten($color-draw, 20%);
-    }
-
-    .matches-kpi-card__value {
-      color: $color-draw
-    }
-  }
-
-  &--loss {
-    background: rgba(lighten($color-loss, 10%), 0.16);
-
-    .matches-kpi-card__label,
-    .matches-kpi-card__sub {
-      color: lighten($color-loss, 20%);
-    }
-
-    .matches-kpi-card__value {
-      color: $color-loss
-    }
+    border-color: $color-win;
+    box-shadow: 0 0 0 2px $color-win-dim;
+    transform: translateY(-3px);
   }
 }
+
+.card-draw {
+  border-top: 3px solid $color-draw;
+  &::before { background: linear-gradient(180deg, $color-draw-dim 0%, transparent 50%); }
+  .card-number { color: $color-draw; }
+
+  &--active {
+    border-color: $color-draw;
+    box-shadow: 0 0 0 2px $color-draw-dim;
+    transform: translateY(-3px);
+  }
+}
+
+.card-lost {
+  border-top: 3px solid $color-loss;
+  &::before { background: linear-gradient(180deg, $color-loss-dim 0%, transparent 50%); }
+  .card-number { color: $color-loss; }
+
+  &--active {
+    border-color: $color-loss;
+    box-shadow: 0 0 0 2px $color-loss-dim;
+    transform: translateY(-3px);
+  }
+}
+
+// ── Badge ──────────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 99px;
+  margin-bottom: 10px;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &-won  { background: $color-win-dim;  color: $color-win; }
+  &-draw { background: $color-draw-dim; color: $color-draw; }
+  &-lost { background: $color-loss-dim;    color: $color-loss; }
+}
+
+// ── Percentage ─────────────────────────────────────────
+.pct-wrap {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid $color-border;
+}
+
+.pct-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: $color-text;
+  line-height: 1;
+
+  small {
+    font-size: 13px;
+    font-weight: 500;
+    color: $color-text-muted;
+    margin-left: 3px;
+  }
+}
+
+// ── Grid Historial de partidos ───────────────────────────────────────────────
 
 .matches-history__card {
   @include card;

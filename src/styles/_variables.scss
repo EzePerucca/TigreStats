@@ -13,8 +13,11 @@ $color-border:       rgba(255,255,255,0.07);
 
 // ── Resultado ────────────────────────────────────────────────────────────────
 $color-win:   #4ADE80;
+$color-win-dim: rgba(74, 222, 128, 0.15);
 $color-draw:  #FBD724;
+$color-draw-dim: rgba(251, 215, 36, 0.15);
 $color-loss:  #F87171;
+$color-loss-dim: rgba(248, 113, 113, 0.15);
 
 // ── Tipografía ───────────────────────────────────────────────────────────────
 // Agregar en index.html:
