@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { MatchesService } from '../../core/services/matches.service';
 import { PageHeaderComponent } from "../../shared/components/page-header/page-header.component";
+import { DistributionBarComponent } from "../../shared/graphs/distribution-bar/distribution-bar.component";
 
 type KpiFilter = 'played' | 'won' | 'drawn' | 'lost';
 
 @Component({
   selector: 'app-matches',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent],
+  imports: [CommonModule, PageHeaderComponent, DistributionBarComponent],
   templateUrl: './matches.component.html',
   styleUrl: './matches.component.scss'
 })
-export class MatchesComponent implements OnChanges {
+export class MatchesComponent {
   private matchesService = inject(MatchesService);
 
   readonly loading = this.matchesService.loading;
@@ -20,15 +21,6 @@ export class MatchesComponent implements OnChanges {
   readonly stats = this.matchesService.stats;
   readonly season = this.matchesService.season;
   readonly selectedKpiFilter = signal<KpiFilter>('played');
-
-  
-  ganadosPct  = 0;
-  empatadosPct = 0;
-  perdidosPct  = 0;
-  // Flex values for the distribution bar (proportional)
-  flexGanados  = 0;
-  flexEmpatados = 0;
-  flexPerdidos  = 0;
 
   readonly allMatches = computed(() =>
     [...this.matchesService.matches()].sort(
@@ -51,19 +43,8 @@ export class MatchesComponent implements OnChanges {
     }
   });
 
-  ngOnInit(): void {
-    this.calculate();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['stats']) {
-      this.calculate();
-    }
-  }
-
   constructor() {
     this.matchesService.loadMatches();
-    this.calculate();
   }
 
   getResultLabel(result?: string): string {
@@ -101,18 +82,4 @@ export class MatchesComponent implements OnChanges {
   }
 
   trackById = (_: number, match: { id: string }) => match.id;
-  
-  private calculate(): void {
-    const total = this.stats().played;
-    if (total === 0) return;
-
-    this.ganadosPct   = parseFloat(((this.stats().won   / total) * 100).toFixed(1));
-    this.empatadosPct = parseFloat(((this.stats().drawn / total) * 100).toFixed(1));
-    this.perdidosPct  = parseFloat(((this.stats().lost  / total) * 100).toFixed(1));
-
-    // Use raw values as flex weights — browser distributes proportionally
-    this.flexGanados   = this.stats().won;
-    this.flexEmpatados = this.stats().drawn;
-    this.flexPerdidos  = this.stats().lost;
-  }
 }

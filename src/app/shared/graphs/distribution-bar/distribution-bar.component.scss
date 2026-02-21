@@ -1,0 +1,60 @@
+@use '../../../../styles/variables' as *;
+
+.dist-bar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.dist-bar {
+  display: flex;
+  height: 5px;
+  border-radius: 99px;
+  overflow: hidden;
+  gap: 2px;
+  margin-bottom: 12px;
+
+  span {
+    border-radius: 99px;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+    &:nth-child(1) { animation-delay: 0.5s; }
+    &:nth-child(2) { animation-delay: 0.6s; }
+    &:nth-child(3) { animation-delay: 0.7s; }
+  }
+
+  .seg-g { background: $color-win; }
+  .seg-e { background: $color-draw; }
+  .seg-p { background: $color-loss; }
+}
+
+@keyframes grow {
+  to { transform: scaleX(1); }
+}
+
+.dist-legend {
+  display: flex;
+  gap: 14px;
+
+  span {
+    font-size: 11px;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    &.lg::before { background: $color-win; }
+    &.le::before { background: $color-draw; }
+    &.lp::before { background: $color-loss; }
+  }
+}

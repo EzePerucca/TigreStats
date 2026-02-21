@@ -19,18 +19,13 @@
           <div class="glow"></div>
           <div class="card-label">Total Jugados</div>
           <div class="card-number">{{ stats().played }}</div>
-          <div class="dist-bar-container">
-            <div class="dist-bar">
-              <span class="seg-g" [style.flex]="flexGanados"></span>
-              <span class="seg-e" [style.flex]="flexEmpatados"></span>
-              <span class="seg-p" [style.flex]="flexPerdidos"></span>
-            </div>
-            <div class="dist-legend">
-              <span class="lg">{{ stats().won }} G</span>
-              <span class="le">{{ stats().drawn }} E</span>
-              <span class="lp">{{ stats().lost }} P</span>
-            </div>
-          </div>
+          <app-distribution-bar
+            #distBar
+            [played]="stats().played"
+            [won]="stats().won"
+            [drawn]="stats().drawn"
+            [lost]="stats().lost">
+          </app-distribution-bar>
         </div>
     
         <!-- Card 2: Ganados -->
@@ -41,7 +36,7 @@
           <div class="card-number">{{ stats().won }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
-              {{ ganadosPct }}%<small> del total</small>
+              {{ distBar.ganadosPct() }}%<small> del total</small>
             </div>
           </div>
         </div>
@@ -54,7 +49,7 @@
           <div class="card-number">{{ stats().drawn }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
-              {{ empatadosPct }}%<small> del total</small>
+              {{ distBar.empatadosPct() }}%<small> del total</small>
             </div>
           </div>
         </div>
@@ -67,7 +62,7 @@
           <div class="card-number">{{ stats().lost }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
-              {{ perdidosPct }}%<small> del total</small>
+              {{ distBar.perdidosPct() }}%<small> del total</small>
             </div>
           </div>
         </div>

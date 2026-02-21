@@ -1,0 +1,12 @@
+<div class="dist-bar-container">
+  <div class="dist-bar">
+    <span class="seg-g" [style.flex]="flexGanados()"></span>
+    <span class="seg-e" [style.flex]="flexEmpatados()"></span>
+    <span class="seg-p" [style.flex]="flexPerdidos()"></span>
+  </div>
+  <div class="dist-legend">
+    <span class="lg">{{ won }} G</span>
+    <span class="le">{{ drawn }} E</span>
+    <span class="lp">{{ lost }} P</span>
+  </div>
+</div>
