@@ -30,8 +30,7 @@
     <div class="dashboard__split">
       <!-- MAIN SECTION (LEFT) -->
       <div class="dashboard__main">
-        <!-- KPI CARDS -->
-        <app-kpi-cards [stats]="stats()"></app-kpi-cards>
+        <app-kpi-current-season [kpis]="seasonKpis" />
 
         <!-- ÚLTIMOS RESULTADOS -->
         <app-last-matches

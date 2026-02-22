@@ -2,15 +2,14 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchesService } from '../../core/services/matches.service';
 import { NextMatchCardComponent } from '../../shared/components/next-match-card/next-match-card.component';
-import { KpiCards } from '../../shared/components/kpi-cards/kpi-cards';
 import { RecentFormComponent } from '../../shared/components/recent-form/recent-form.component';
 import { LastMatchesComponent } from '../../shared/components/last-matches/last-matches.component';
 import { StandingsTableComponent } from '../../shared/components/standings-table/standings-table.component';
-
+import { KpiCurrentSeasonComponent, SeasonKpis } from '../../shared/components/kpis-current-season/kpi-current-season.component';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, NextMatchCardComponent, KpiCards, RecentFormComponent, LastMatchesComponent, StandingsTableComponent],
+  imports: [CommonModule, NextMatchCardComponent, KpiCurrentSeasonComponent, RecentFormComponent, LastMatchesComponent, StandingsTableComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -18,14 +17,24 @@ export class DashboardComponent {
 
   private matchesService = inject(MatchesService);
 
-  readonly matches    = this.matchesService.lastMatches;
-  readonly stats      = this.matchesService.stats;
+  readonly matches = this.matchesService.lastMatches;
+  readonly stats = this.matchesService.stats;
   readonly recentForm = this.matchesService.recentForm;
-  readonly loading    = this.matchesService.loading;
-  readonly error      = this.matchesService.error;
-  readonly nextMatch  = this.matchesService.nextMatch;
+  readonly loading = this.matchesService.loading;
+  readonly error = this.matchesService.error;
+  readonly nextMatch = this.matchesService.nextMatch;
 
   readonly seasons = [2024, 2023, 2022];
+
+  seasonKpis: SeasonKpis = {
+    partidosJugados: 28,
+    ganados: 9,
+    empatados: 10,
+    perdidos: 9,
+    puntos: 37,
+    golesAFavor: 28,
+    golesEnContra: 30,
+  };
 
   constructor() {
     this.matchesService.loadMatches();

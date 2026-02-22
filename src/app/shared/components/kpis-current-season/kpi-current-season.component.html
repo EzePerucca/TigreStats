@@ -1,0 +1,56 @@
+<div class="kpi-grid">
+
+  <!-- Card 1: Partidos Jugados -->
+  <div class="kpi-card card-matches">
+    <div class="kpi-label">Partidos Jugados</div>
+    <div class="kpi-number">{{ kpis.partidosJugados }}</div>
+
+    <app-distribution-bar
+      [played]="kpis.partidosJugados"
+      [won]="kpis.ganados"
+      [drawn]="kpis.empatados"
+      [lost]="kpis.perdidos">
+    </app-distribution-bar>
+  </div>
+
+  <!-- Card 2: Puntos -->
+  <div class="kpi-card card-points">
+    <div class="glow"></div>
+    <div class="kpi-label">Puntos</div>
+    <div class="kpi-number">{{ kpis.puntos }}</div>
+    <div class="ppt-badge">{{ puntosPromedio }} por partido</div>
+  </div>
+
+  <!-- Card 3: Goles a Favor -->
+  <div class="kpi-card card-gf">
+    <div class="kpi-label">Goles a Favor</div>
+    <div class="kpi-number">{{ kpis.golesAFavor }}</div>
+
+    <div class="goals-compare">
+      <div class="goals-compare-label">VS goles en contra</div>
+      <div class="goals-bar-wrap">
+        <div class="goals-bar-fill" [style.width.%]="gfPct"></div>
+      </div>
+      <div class="goals-compare-note">
+        <strong>{{ golesDiffLabel }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 4: Goles en Contra -->
+  <div class="kpi-card card-ga">
+    <div class="kpi-label">Goles en Contra</div>
+    <div class="kpi-number">{{ kpis.golesEnContra }}</div>
+
+    <div class="goals-compare">
+      <div class="goals-compare-label">VS goles a favor</div>
+      <div class="goals-bar-wrap">
+        <div class="goals-bar-fill" [style.width.%]="gcPct"></div>
+      </div>
+      <div class="goals-compare-note">
+        <strong>{{ golesContraDiffLabel }}</strong>
+      </div>
+    </div>
+  </div>
+
+</div>

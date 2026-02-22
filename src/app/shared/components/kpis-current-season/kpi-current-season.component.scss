@@ -1,0 +1,197 @@
+@use '../../../../styles/variables' as *;
+
+// ── Local token for points card ─────────────────────────
+$color-points:     #60A5FA;
+$color-points-dim: rgba(96, 165, 250, 0.12);
+
+:host {
+  display: block;
+}
+
+// ── Grid ───────────────────────────────────────────────
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: $space-lg;
+}
+
+// ── Base card ──────────────────────────────────────────
+.kpi-card {
+  @include card;
+  padding: 22px 22px 18px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: rise 0.45s ease forwards;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+  }
+
+  &:hover::after { opacity: 1; }
+
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.07}s; }
+  }
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ── Label & number ─────────────────────────────────────
+.kpi-label {
+  font-family: $font-body;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $space-sm;
+}
+
+.kpi-number {
+  font-family: $font-display;
+  font-size: 60px;
+  line-height: 1;
+  color: $color-text;
+  letter-spacing: 0.02em;
+  margin-bottom: $space-xs;
+}
+
+// ── Card: Partidos Jugados ─────────────────────────────
+.card-matches {
+
+  .kpi-number {
+    margin-bottom: $space-xl;
+  }
+
+  &::after {
+    background: linear-gradient(135deg, rgba($color-accent, 0.05) 0%, transparent 60%);
+  }
+}
+
+@keyframes grow {
+  to { transform: scaleX(1); }
+}
+
+// ── Card: Puntos ───────────────────────────────────────
+.card-points {
+  // border-top: 3px solid $color-points;
+  background: linear-gradient(160deg, #16243e 0%, $color-surface 100%);
+
+  &::after {
+    background: linear-gradient(180deg, $color-points-dim 0%, transparent 55%);
+  }
+
+  .kpi-number {
+    color: $color-points;
+    font-size: 68px;
+  }
+
+  .glow {
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.ppt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: 99px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-points;
+  margin-top: $space-md;
+
+  &::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: $color-points;
+  }
+}
+
+// ── Card: Goles ────────────────────────────────────────
+.card-gf {
+  // border-top: 3px solid $color-win;
+
+  &::after {
+    background: linear-gradient(180deg, $color-win-dim 0%, transparent 50%);
+  }
+
+  .kpi-number { color: $color-win; }
+
+  .goals-bar-fill { background: $color-win; }
+}
+
+.card-ga {
+  // border-top: 3px solid $color-loss;
+
+  &::after {
+    background: linear-gradient(180deg, $color-loss-dim 0%, transparent 50%);
+  }
+
+  .kpi-number { color: $color-loss; }
+
+  .goals-bar-fill { background: $color-loss; }
+}
+
+// ── Goals comparison ───────────────────────────────────
+.goals-compare {
+  margin-top: $space-md;
+  padding-top: $space-md;
+  // border-top: 1px solid $color-border;
+}
+
+.goals-compare-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: 7px;
+}
+
+.goals-bar-wrap {
+  height: 4px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: $color-border;
+}
+
+.goals-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: grow 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+.goals-compare-note {
+  margin-top: 7px;
+  font-size: 11px;
+  color: $color-text-muted;
+
+  strong { font-weight: 600; }
+}
+
+.card-gf .goals-compare-note strong { color: $color-win; }
+.card-ga .goals-compare-note strong { color: $color-loss; }
