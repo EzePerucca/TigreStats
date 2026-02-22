@@ -23,7 +23,7 @@ export class StandingsTableComponent implements OnInit {
   readonly error = this.standingsService.error;
   readonly selectedLeagueId = this.standingsService.selectedLeagueId;
   readonly availableLeagues = this.standingsService.availableLeagues;
-  readonly defaultRows = 8;
+  readonly defaultRows = 10;
 
   readonly showFull = signal(false);
 

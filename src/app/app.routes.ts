@@ -19,7 +19,7 @@ export const routes: Routes = [
         title: 'Dashboard — TigreStats'
       },
       {
-        path: 'matches',
+        path: 'partidos',
         loadComponent: () =>
           import('./features/matches/matches.component').then(m => m.MatchesComponent),
         title: 'Partidos — TigreStats'
