@@ -115,6 +115,26 @@
 
 @media (max-width: $bp-md) {
     .standings__table {
-        min-width: 520px;
+        min-width: 430px;
+
+        th,
+        td {
+            padding: 10px 8px;
+            font-size: 0.82rem;
+        }
+    }
+}
+
+@media (max-width: $bp-sm) {
+    .standings__table {
+        min-width: 360px;
+
+        // Oculta columnas de goles a favor y en contra
+        th:nth-child(4),
+        th:nth-child(5),
+        td:nth-child(4),
+        td:nth-child(5) {
+            display: none;
+        }
     }
 }

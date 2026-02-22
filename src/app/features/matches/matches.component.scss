@@ -272,6 +272,7 @@
     font-size: 0.88rem;
     color: rgba($color-text, 0.82);
     text-align: left;
+    vertical-align: middle;
   }
 
   th {
@@ -337,5 +338,62 @@
   &.result--loss {
     background: rgba($color-loss, 0.12);
     color: $color-loss;
+  }
+}
+
+@media (max-width: $bp-lg) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: $bp-md) {
+  .matches {
+    padding: $space-lg $space-md 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .card {
+    padding: 18px 16px;
+  }
+
+  .card-total {
+    .card-number {
+      font-size: 56px;
+      margin-bottom: $space-md;
+    }
+  }
+
+  .card-number {
+    font-size: 48px;
+  }
+
+  .matches-history__table {
+    min-width: 700px;
+  }
+
+  .matches-history__fixture {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .matches-history__table {
+    min-width: 620px;
+
+    th,
+    td {
+      padding: 10px 8px;
+      font-size: 0.8rem;
+    }
+  }
+
+  .matches-history__score {
+    font-size: 1.1rem;
   }
 }

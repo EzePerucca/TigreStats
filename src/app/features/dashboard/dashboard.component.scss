@@ -128,6 +128,46 @@
   line-height: 1.6;
 }
 
+@media (max-width: $bp-md) {
+  .dashboard {
+    padding: 0 $space-md $space-lg;
+  }
+
+  .dashboard__split {
+    gap: $space-lg;
+    margin-top: $space-lg;
+  }
+
+  .dashboard__hero {
+    margin: 0 (-$space-md) $space-lg;
+    padding: $space-lg $space-md;
+    min-height: 240px;
+  }
+
+  .dashboard__hero-content {
+    gap: $space-sm;
+  }
+
+  .dashboard__hero-title {
+    font-size: clamp(2rem, 12vw, 3.2rem);
+    line-height: 0.92;
+  }
+
+  .dashboard__hero-sub {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+
+  .dashboard__badge {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    padding: 5px 10px;
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
 // ── Match List ────────────────────────────────────────────────────────────────
 .match-list {
   @include card;

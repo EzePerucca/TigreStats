@@ -93,10 +93,12 @@
                         {{ getResultLabel(match.result) }}
                       </span>
                     </td>
-                    <td class="matches-history__fixture">
-                      <span [class.matches-history__team--tigre]="match.homeTeam === 'Tigre'">{{ match.homeTeam }}</span>
-                      <span>vs</span>
-                      <span [class.matches-history__team--tigre]="match.awayTeam === 'Tigre'">{{ match.awayTeam }}</span>
+                    <td>
+                      <div class="matches-history__fixture">
+                        <span [class.matches-history__team--tigre]="match.homeTeam === 'Tigre'">{{ match.homeTeam }}</span>
+                        <span>vs</span>
+                        <span [class.matches-history__team--tigre]="match.awayTeam === 'Tigre'">{{ match.awayTeam }}</span>
+                      </div>
                     </td>
                     <td class="matches-history__score">{{ getScore(match) }}</td>
                     <td>{{ match.date | date: 'dd MMM yyyy' : '' : 'es' }}</td>
