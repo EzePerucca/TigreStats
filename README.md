@@ -4,13 +4,13 @@
 Este proyecto tiene como objetivo principal proporcionar estadísticas detalladas del Club Atlético Tigre, un club de fútbol argentino. Aquí se recopilan y presentan datos relevantes sobre los partidos, jugadores y la historia del club.
 
 ## Objetivos
-- Ofrecer una plataforma fácil de usar para que los aficionados puedan acceder a estadísticas importantes del equipo.
+- Ofrecer una plataforma fácil de usar para que los aficionados puedan acceder a estadísticas historicas del equipo.
 - Mantener actualizada la información sobre los partidos y jugadores.
-- Fomentar la interacción de los usuarios a través de comentarios y aportes.
+- Disponibilizar las estadisticas a los intereados.
 
 ## Características Principales
 - Visualización de estadísticas en tiempo real.
-- Sección de noticias y actualizaciones del club.
+- Historial de partidos y metricas unicas
 - Perfil de jugadores con estadísticas individualizadas.
 
 ## Tech Stack
