@@ -31,8 +31,7 @@
         <!-- Card 2: Ganados -->
         <div class="card card-result card-won" (click)="setKpiFilter('won')"
           [class.card-won--active]="selectedKpiFilter() === 'won'">
-          <div class="badge badge-won">Victorias</div>
-          <div class="card-label">Total Ganados</div>
+          <div class="badge badge-won">TOTAL VICTORIAS</div>
           <div class="card-number">{{ stats().won }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
@@ -44,8 +43,7 @@
         <!-- Card 3: Empatados -->
         <div class="card card-result card-draw" (click)="setKpiFilter('drawn')"
           [class.card-draw--active]="selectedKpiFilter() === 'drawn'">
-          <div class="badge badge-draw">Empates</div>
-          <div class="card-label">Total Empatados</div>
+          <div class="badge badge-draw">TOTAL EMPATES</div>
           <div class="card-number">{{ stats().drawn }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
@@ -57,8 +55,7 @@
         <!-- Card 4: Perdidos -->
         <div class="card card-result card-lost" (click)="setKpiFilter('lost')"
           [class.card-lost--active]="selectedKpiFilter() === 'lost'">
-          <div class="badge badge-lost">Derrotas</div>
-          <div class="card-label">Total Perdidos</div>
+          <div class="badge badge-lost">TOTAL DERROTAS</div>
           <div class="card-number">{{ stats().lost }}</div>
           <div class="pct-wrap">
             <div class="pct-number">
